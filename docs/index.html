@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AEC Market – Skills &amp; Programs Marketplace for WordPress</title>
+<meta name="description" content="A multi-vendor WooCommerce marketplace for AEC/BIM, Excel and AI builders: digital products with license keys plus tiered services.">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1d2327; --muted: #646970; --card: #f6f7f7;
+    --accent: #2271b1; --accent-fg: #ffffff; --border: #e2e4e7; --code-bg: #1d2327; --code-fg: #e2e4e7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181d; --fg: #e8eaed; --muted: #9aa0a6; --card: #1f2229;
+      --accent: #4f94d4; --accent-fg: #0d0f13; --border: #2c3038; --code-bg: #0d0f13; --code-fg: #d0d4d9;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
+  header.hero { padding: 5rem 0 4rem; text-align: center; }
+  .hero h1 { font-size: 2.6rem; line-height: 1.15; letter-spacing: -0.02em; }
+  .hero .tag { color: var(--muted); font-size: 1.2rem; max-width: 42em; margin: 1rem auto 0; }
+  .hero .badges { margin-top: 1rem; color: var(--muted); font-size: .9rem; }
+  .hero .badges span { display: inline-block; border: 1px solid var(--border); border-radius: 99px; padding: .2em .8em; margin: .2em; }
+  .cta { margin-top: 2rem; display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: .7em 1.5em; border-radius: 6px; text-decoration: none;
+    font-weight: 600; border: 1px solid var(--accent);
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-fg); }
+  .btn-ghost { color: var(--accent); }
+  section { padding: 3rem 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 1.7rem; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.05rem; margin-bottom: .4rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+  .card p { color: var(--muted); font-size: .95rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  th, td { text-align: left; padding: .6em .8em; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; }
+  code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .9em; }
+  td code, li code, p code { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: .1em .4em; }
+  pre {
+    background: var(--code-bg); color: var(--code-fg); border-radius: 10px;
+    padding: 1.1rem 1.3rem; overflow-x: auto; font-size: .88rem; line-height: 1.6;
+  }
+  ol.steps { padding-left: 1.3em; }
+  ol.steps li { margin-bottom: .5em; }
+  footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .9rem; text-align: center; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>AEC Market</h1>
+    <p class="tag">A multi-vendor WooCommerce marketplace where AEC/BIM specialists, Excel experts and AI tool authors sell <strong>digital products with license keys</strong> and <strong>tiered services</strong> — side by side.</p>
+    <div class="badges">
+      <span>WordPress 6.2+</span><span>WooCommerce 8.0+</span><span>PHP 7.4+</span><span>GPL-2.0-or-later</span>
+    </div>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/ibuilder/aec-market/raw/main/dist/aec-market.zip">Download aec-market.zip</a>
+      <a class="btn btn-ghost" href="https://github.com/ibuilder/aec-market">View on GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>What it does</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Vendor onboarding</h3>
+        <p>Front-end application form with manual or automatic approval. Approved vendors get a dedicated role with minimal capabilities — no wp-admin required.</p>
+      </div>
+      <div class="card">
+        <h3>Vendor dashboard</h3>
+        <p>Front-end tabs for products, orders, earnings and store settings. Vendors create downloadable programs or tiered service listings, pending admin review by default.</p>
+      </div>
+      <div class="card">
+        <h3>Licensing built in</h3>
+        <p>Downloadable products generate unique license keys per purchase with activation limits, shown on the customer's order page and manageable in admin.</p>
+      </div>
+      <div class="card">
+        <h3>License REST API</h3>
+        <p>Sold scripts and Revit/Excel add-ins phone home over <code>wpaec/v1</code> to activate, deactivate and validate keys per instance.</p>
+      </div>
+      <div class="card">
+        <h3>Tiered services</h3>
+        <p>Basic / Standard / Premium packages with per-tier pricing, inclusions and delivery days. Prices are always re-validated server-side at cart time.</p>
+      </div>
+      <div class="card">
+        <h3>Commissions &amp; payouts</h3>
+        <p>Configurable platform commission recorded per line item on completion, voided on refunds, with a payout ledger and per-vendor rate overrides.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Install in five steps</h2>
+    <ol class="steps">
+      <li>Install and activate <a href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a>.</li>
+      <li>Upload <code>aec-market.zip</code> under <em>Plugins → Add New → Upload</em> and activate.</li>
+      <li>Review <em>AEC Market → Settings</em> — commission rate, approval mode, allowed upload types.</li>
+      <li>Send builders to the auto-created <em>Become a Vendor</em> page.</li>
+      <li>Approve applications under <em>AEC Market → Vendors</em>.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Shortcodes</h2>
+    <table>
+      <tr><th>Shortcode</th><th>Purpose</th></tr>
+      <tr><td><code>[wpaec_vendor_registration]</code></td><td>Vendor application form</td></tr>
+      <tr><td><code>[wpaec_vendor_dashboard]</code></td><td>Vendor dashboard — products, orders, earnings, settings</td></tr>
+      <tr><td><code>[wpaec_vendor_store]</code></td><td>Public vendor store (<code>?vendor={id}</code> or <code>vendor</code> attribute)</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>License API</h2>
+    <p style="color:var(--muted); margin-bottom:1rem;">The license key itself is the credential; no personal data is returned.</p>
+    <pre>POST /wp-json/wpaec/v1/license/activate     { "license_key": "…", "instance": "…" }
+POST /wp-json/wpaec/v1/license/deactivate   { "license_key": "…", "instance": "…" }
+GET  /wp-json/wpaec/v1/license/validate?license_key=…</pre>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>AEC Market – Skills &amp; Programs Marketplace · <a href="https://www.gnu.org/licenses/gpl-2.0.html">GPL-2.0-or-later</a> · <a href="https://github.com/ibuilder/aec-market">github.com/ibuilder/aec-market</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

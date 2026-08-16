@@ -1,6 +1,8 @@
 # Development files excluded from the distributed plugin zip.
 .distignore
 dist
+docs
+README.md
 .git
 .github
 phpcs.xml.dist
