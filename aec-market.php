@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name:       AEC Market – Skills & Programs Marketplace
- * Plugin URI:        https://github.com/wpaecmarket/aec-market
+ * Plugin URI:        https://github.com/ibuilder/aec-market
  * Description:       An Envato-style multi-vendor marketplace for AEC/BIM specialists, Excel/automation experts and AI tool authors. Sell digital products (scripts, templates, add-ins) with license keys and tiered services (Basic/Standard/Premium) side by side, with vendor dashboards, commissions and payout tracking. Requires WooCommerce.
  * Version:           1.0.0
  * Author:            AEC Market
- * Author URI:        https://github.com/wpaecmarket
+ * Author URI:        https://github.com/ibuilder
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       aec-market
