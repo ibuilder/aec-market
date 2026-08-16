@@ -1,0 +1,12 @@
+# Development files excluded from the distributed plugin zip.
+.distignore
+dist
+.git
+.github
+phpcs.xml.dist
+node_modules
+vendor
+composer.json
+composer.lock
+package.json
+package-lock.json
