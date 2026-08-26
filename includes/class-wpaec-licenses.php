@@ -74,6 +74,12 @@ class AEC_Market_Licenses {
 
 			$needed = max( 0, $item->get_quantity() - (int) $existing );
 
+			// Extended license grants a firm-wide activation allowance.
+			$limit = max( 1, (int) get_post_meta( $product_id, '_wpaec_activation_limit', true ) );
+			if ( 'extended' === $item->get_meta( '_wpaec_license_type' ) && class_exists( 'AEC_Market_License_Tiers' ) ) {
+				$limit = AEC_Market_License_Tiers::EXTENDED_ACTIVATIONS;
+			}
+
 			for ( $i = 0; $i < $needed; $i++ ) {
 				self::create(
 					array(
@@ -81,7 +87,7 @@ class AEC_Market_Licenses {
 						'product_id'       => $product_id,
 						'user_id'          => $order->get_customer_id(),
 						'vendor_id'        => (int) get_post_field( 'post_author', $product_id ),
-						'activation_limit' => max( 1, (int) get_post_meta( $product_id, '_wpaec_activation_limit', true ) ),
+						'activation_limit' => $limit,
 					)
 				);
 			}

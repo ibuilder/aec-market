@@ -206,6 +206,10 @@ class AEC_Market_Frontend {
 		if ( $updated ) {
 			echo '<span class="wpaec-fact"><strong>' . esc_html__( 'Updated', 'aec-market' ) . '</strong> ' . esc_html( $updated ) . '</span>';
 		}
+		$support = (int) get_post_meta( $pid, '_wpaec_support_months', true );
+		if ( $support > 0 ) {
+			echo '<span class="wpaec-fact"><strong>' . esc_html__( 'Support', 'aec-market' ) . '</strong> ' . esc_html( sprintf( /* translators: %d months */ _n( '%d month', '%d months', $support, 'aec-market' ), $support ) ) . '</span>';
+		}
 		if ( '' !== $demo ) {
 			echo '<a class="wpaec-demo-btn" href="' . esc_url( $demo ) . '" target="_blank" rel="noopener nofollow">' . esc_html__( 'Live preview', 'aec-market' ) . ' &#8599;</a>';
 		}

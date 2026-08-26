@@ -230,6 +230,12 @@ class AEC_Market_Dashboard {
 			update_post_meta( $product_id, '_wpaec_demo_url', isset( $_POST['wpaec_demo_url'] ) ? esc_url_raw( wp_unslash( $_POST['wpaec_demo_url'] ) ) : '' );
 			update_post_meta( $product_id, '_wpaec_changelog', isset( $_POST['wpaec_changelog'] ) ? sanitize_textarea_field( wp_unslash( $_POST['wpaec_changelog'] ) ) : '' );
 
+			// License tiers + support (nonce verified above).
+			$ext_price = isset( $_POST['wpaec_extended_price'] ) ? wc_format_decimal( sanitize_text_field( wp_unslash( $_POST['wpaec_extended_price'] ) ) ) : '';
+			update_post_meta( $product_id, '_wpaec_extended_price', $ext_price );
+			update_post_meta( $product_id, '_wpaec_extended_desc', isset( $_POST['wpaec_extended_desc'] ) ? sanitize_text_field( wp_unslash( $_POST['wpaec_extended_desc'] ) ) : '' );
+			update_post_meta( $product_id, '_wpaec_support_months', isset( $_POST['wpaec_support_months'] ) ? absint( wp_unslash( $_POST['wpaec_support_months'] ) ) : 0 );
+
 			self::maybe_attach_upload( $product_id );
 		} else {
 			self::save_service_tiers( $product_id );

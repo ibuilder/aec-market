@@ -4,7 +4,7 @@ Tags: marketplace, multivendor, woocommerce, licensing, services
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,10 @@ Vendor uploads are restricted to an admin-controlled extension whitelist; execut
 No. Commissions, licenses and vendor data are preserved unless you set `remove_data_on_uninstall` in the `wpaecmarket_settings` option before deleting the plugin.
 
 == Changelog ==
+
+= 1.7.0 =
+* New (Envato-style monetization): optional Regular vs Extended license tiers — vendors set an Extended price + what it grants; buyers pick a tier on the product page (cart priced accordingly, recorded on the order, Extended grants a firm-wide activation allowance).
+* New: "support included (months)" badge on listings; pre-sale questions covered by the enabled reviews.
 
 = 1.6.0 =
 * New (author richness): vendor directory and homepage builder cards now show sales count and "since {year}".

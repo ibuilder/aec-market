@@ -133,6 +133,20 @@ $wpaec_selected_cat = $wpaec_product_id ? (int) current( wp_get_object_terms( $w
 			<label for="wpaec_changelog"><?php esc_html_e( 'Changelog (optional)', 'aec-market' ); ?></label>
 			<textarea name="wpaec_changelog" id="wpaec_changelog" rows="4" placeholder="1.0.0 — Initial release"><?php echo esc_textarea( $wpaec_product_id ? get_post_meta( $wpaec_product_id, '_wpaec_changelog', true ) : '' ); ?></textarea>
 		</p>
+		<p class="wpaec-field">
+			<label for="wpaec_extended_price"><?php esc_html_e( 'Extended license price (optional)', 'aec-market' ); ?></label>
+			<input type="number" step="0.01" min="0" name="wpaec_extended_price" id="wpaec_extended_price" value="<?php echo esc_attr( $wpaec_product_id ? get_post_meta( $wpaec_product_id, '_wpaec_extended_price', true ) : '' ); ?>" placeholder="e.g. 199" />
+			<small class="wpaec-hint"><?php esc_html_e( 'Offer a higher-priced Extended license for commercial / firm-wide / redistribution use. Leave blank for a single price.', 'aec-market' ); ?></small>
+		</p>
+		<p class="wpaec-field">
+			<label for="wpaec_extended_desc"><?php esc_html_e( 'Extended license — what it grants (optional)', 'aec-market' ); ?></label>
+			<input type="text" name="wpaec_extended_desc" id="wpaec_extended_desc" value="<?php echo esc_attr( $wpaec_product_id ? get_post_meta( $wpaec_product_id, '_wpaec_extended_desc', true ) : '' ); ?>" placeholder="<?php esc_attr_e( 'Firm-wide use & redistribution', 'aec-market' ); ?>" />
+		</p>
+		<p class="wpaec-field">
+			<label for="wpaec_support_months"><?php esc_html_e( 'Support included (months)', 'aec-market' ); ?></label>
+			<input type="number" min="0" name="wpaec_support_months" id="wpaec_support_months" value="<?php echo esc_attr( $wpaec_product_id ? get_post_meta( $wpaec_product_id, '_wpaec_support_months', true ) : '6' ); ?>" />
+			<small class="wpaec-hint"><?php esc_html_e( 'Shown as a trust badge on your listing. 0 to hide.', 'aec-market' ); ?></small>
+		</p>
 	</div>
 
 	<div class="wpaec-type-fields" data-type="service">
