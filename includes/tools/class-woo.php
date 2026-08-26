@@ -47,6 +47,7 @@ class Woo {
 		$settings = Settings::get();
 		$packs    = isset( $settings['packs'] ) ? $settings['packs'] : array();
 		$map      = isset( $settings['product_map'] ) ? $settings['product_map'] : array();
+		$cat_id   = $this->credits_category_id();
 
 		foreach ( $packs as $pack ) {
 			$product_id = isset( $map[ $pack['id'] ] ) ? (int) $map[ $pack['id'] ] : 0;
@@ -64,6 +65,9 @@ class Woo {
 			$product->set_sku( 'aec-forge-tools-' . $pack['id'] );
 			$product->update_meta_data( '_aec_tools_pack_id', $pack['id'] );
 			$product->update_meta_data( '_aec_tools_credits', (int) $pack['credits'] );
+			if ( $cat_id ) {
+				$product->set_category_ids( array( $cat_id ) );
+			}
 			$new_id = $product->save();
 
 			if ( $new_id ) {
@@ -74,6 +78,27 @@ class Woo {
 		$settings['product_map'] = $map;
 		update_option( Settings::OPTION, $settings );
 		delete_option( 'aec_tools_needs_product_sync' );
+	}
+
+	/**
+	 * Get (creating if needed) the "AI Credits" product category term ID so the
+	 * credit packs sit in their own shop category, separate from vendor products.
+	 *
+	 * @return int Term ID, or 0 on failure.
+	 */
+	private function credits_category_id() {
+		if ( ! taxonomy_exists( 'product_cat' ) ) {
+			return 0;
+		}
+		$term = get_term_by( 'slug', 'ai-credits', 'product_cat' );
+		if ( $term && ! is_wp_error( $term ) ) {
+			return (int) $term->term_id;
+		}
+		$created = wp_insert_term( __( 'AI Credits', 'aec-market' ), 'product_cat', array( 'slug' => 'ai-credits' ) );
+		if ( is_wp_error( $created ) ) {
+			return 0;
+		}
+		return isset( $created['term_id'] ) ? (int) $created['term_id'] : 0;
 	}
 
 	/**
