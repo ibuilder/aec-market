@@ -22,6 +22,8 @@ class AEC_Market_Frontend {
 		add_shortcode( 'wpaec_vendors', array( __CLASS__, 'vendors_shortcode' ) );
 		add_action( 'woocommerce_product_meta_start', array( __CLASS__, 'sold_by_single' ) );
 		add_action( 'woocommerce_after_shop_loop_item_title', array( __CLASS__, 'sold_by_loop' ), 20 );
+		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'item_facts' ), 25 );
+		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'changelog_tab' ) );
 	}
 
 	/**
@@ -174,5 +176,62 @@ class AEC_Market_Frontend {
 		}
 		echo '</div>';
 		return ob_get_clean();
+	}
+
+	/**
+	 * Item facts (version, last updated, live preview) on the single product page.
+	 *
+	 * @return void
+	 */
+	public static function item_facts() {
+		global $product;
+		if ( ! $product || 'program' !== wpaec_get_listing_type( $product->get_id() ) ) {
+			return;
+		}
+		$pid     = $product->get_id();
+		$version = (string) get_post_meta( $pid, '_wpaec_version', true );
+		$demo    = (string) get_post_meta( $pid, '_wpaec_demo_url', true );
+		$updated = get_the_modified_date( get_option( 'date_format' ), $pid );
+
+		echo '<div class="wpaec-item-facts">';
+		if ( '' !== $version ) {
+			echo '<span class="wpaec-fact"><strong>' . esc_html__( 'Version', 'aec-market' ) . '</strong> ' . esc_html( $version ) . '</span>';
+		}
+		if ( $updated ) {
+			echo '<span class="wpaec-fact"><strong>' . esc_html__( 'Updated', 'aec-market' ) . '</strong> ' . esc_html( $updated ) . '</span>';
+		}
+		if ( '' !== $demo ) {
+			echo '<a class="wpaec-demo-btn" href="' . esc_url( $demo ) . '" target="_blank" rel="noopener nofollow">' . esc_html__( 'Live preview', 'aec-market' ) . ' &#8599;</a>';
+		}
+		echo '</div>';
+	}
+
+	/**
+	 * Add a Changelog tab to the single product page when a changelog exists.
+	 *
+	 * @param array $tabs Product tabs.
+	 * @return array
+	 */
+	public static function changelog_tab( $tabs ) {
+		global $product;
+		if ( $product && '' !== (string) get_post_meta( $product->get_id(), '_wpaec_changelog', true ) ) {
+			$tabs['wpaec_changelog'] = array(
+				'title'    => __( 'Changelog', 'aec-market' ),
+				'priority' => 25,
+				'callback' => array( __CLASS__, 'changelog_tab_content' ),
+			);
+		}
+		return $tabs;
+	}
+
+	/**
+	 * Render the Changelog tab content.
+	 *
+	 * @return void
+	 */
+	public static function changelog_tab_content() {
+		global $product;
+		$log = (string) get_post_meta( $product->get_id(), '_wpaec_changelog', true );
+		echo '<pre class="wpaec-changelog">' . esc_html( $log ) . '</pre>';
 	}
 }

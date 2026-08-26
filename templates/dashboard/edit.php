@@ -103,6 +103,20 @@ $wpaec_selected_cat = $wpaec_product_id ? (int) current( wp_get_object_terms( $w
 			<input type="number" min="1" name="wpaec_activation_limit" id="wpaec_activation_limit" value="<?php echo esc_attr( $wpaec_limit ); ?>" />
 			<small class="wpaec-hint"><?php esc_html_e( 'How many machines/seats each key may activate.', 'aec-market' ); ?></small>
 		</p>
+		<p class="wpaec-field">
+			<label for="wpaec_version"><?php esc_html_e( 'Version', 'aec-market' ); ?></label>
+			<input type="text" name="wpaec_version" id="wpaec_version" value="<?php echo esc_attr( $wpaec_product_id ? get_post_meta( $wpaec_product_id, '_wpaec_version', true ) : '1.0.0' ); ?>" placeholder="1.0.0" />
+			<small class="wpaec-hint"><?php esc_html_e( 'Buyers trust maintained tools — bump this each time you ship an update.', 'aec-market' ); ?></small>
+		</p>
+		<p class="wpaec-field">
+			<label for="wpaec_demo_url"><?php esc_html_e( 'Live preview / demo URL (optional)', 'aec-market' ); ?></label>
+			<input type="url" name="wpaec_demo_url" id="wpaec_demo_url" value="<?php echo esc_attr( $wpaec_product_id ? get_post_meta( $wpaec_product_id, '_wpaec_demo_url', true ) : '' ); ?>" placeholder="https://…" />
+			<small class="wpaec-hint"><?php esc_html_e( 'A video, docs page, or interactive demo — adds a “Live preview” button to your listing.', 'aec-market' ); ?></small>
+		</p>
+		<p class="wpaec-field">
+			<label for="wpaec_changelog"><?php esc_html_e( 'Changelog (optional)', 'aec-market' ); ?></label>
+			<textarea name="wpaec_changelog" id="wpaec_changelog" rows="4" placeholder="1.0.0 — Initial release"><?php echo esc_textarea( $wpaec_product_id ? get_post_meta( $wpaec_product_id, '_wpaec_changelog', true ) : '' ); ?></textarea>
+		</p>
 	</div>
 
 	<div class="wpaec-type-fields" data-type="service">

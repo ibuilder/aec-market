@@ -219,6 +219,11 @@ class AEC_Market_Dashboard {
 			$limit = isset( $_POST['wpaec_activation_limit'] ) ? max( 1, absint( wp_unslash( $_POST['wpaec_activation_limit'] ) ) ) : 1;
 			update_post_meta( $product_id, '_wpaec_activation_limit', $limit );
 
+			// Item-depth fields (nonce verified above).
+			update_post_meta( $product_id, '_wpaec_version', isset( $_POST['wpaec_version'] ) ? sanitize_text_field( wp_unslash( $_POST['wpaec_version'] ) ) : '' );
+			update_post_meta( $product_id, '_wpaec_demo_url', isset( $_POST['wpaec_demo_url'] ) ? esc_url_raw( wp_unslash( $_POST['wpaec_demo_url'] ) ) : '' );
+			update_post_meta( $product_id, '_wpaec_changelog', isset( $_POST['wpaec_changelog'] ) ? sanitize_textarea_field( wp_unslash( $_POST['wpaec_changelog'] ) ) : '' );
+
 			self::maybe_attach_upload( $product_id );
 		} else {
 			self::save_service_tiers( $product_id );
