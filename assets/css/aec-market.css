@@ -204,3 +204,35 @@
 	color: #646970;
 	margin-bottom: 0.4em;
 }
+
+/* --- Vendor onboarding checklist (overview tab) --- */
+.wpaec-onboarding {
+	background: linear-gradient( 160deg, #20242b 0%, #14171b 100% );
+	color: #f4f2ef;
+	border-radius: 16px;
+	padding: 1.5rem 1.6rem;
+	margin: 0 0 1.6rem;
+}
+.wpaec-onboarding__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.wpaec-onboarding__head h3 { margin: 0; color: #fff; font-size: 1.2rem; }
+.wpaec-onboarding__count { font-size: .85rem; font-weight: 700; color: #ff8a3d; white-space: nowrap; }
+.wpaec-progress { height: 8px; border-radius: 999px; background: rgba(255,255,255,.12); margin: .9rem 0 1.2rem; overflow: hidden; }
+.wpaec-progress__bar { display: block; height: 100%; background: linear-gradient(90deg, #ff8a3d, #e8600a); border-radius: 999px; transition: width .3s ease; }
+.wpaec-checklist { list-style: none; margin: 0; padding: 0; }
+.wpaec-checklist li { position: relative; padding: .7rem 0 .7rem 2.2rem; border-top: 1px solid rgba(255,255,255,.08); }
+.wpaec-checklist li:first-child { border-top: 0; }
+.wpaec-check {
+	position: absolute; left: 0; top: .8rem; width: 22px; height: 22px; border-radius: 50%;
+	border: 2px solid #5c6470; box-sizing: border-box;
+}
+.wpaec-checklist li.is-done .wpaec-check { background: #63c07a; border-color: #63c07a; }
+.wpaec-checklist li.is-done .wpaec-check::after {
+	content: ""; position: absolute; left: 6px; top: 3px; width: 6px; height: 10px;
+	border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+.wpaec-checklist a { color: #fff; text-decoration: none; }
+.wpaec-checklist a:hover { text-decoration: underline; }
+.wpaec-checklist li.is-done a strong { text-decoration: line-through; opacity: .7; }
+.wpaec-checklist__hint { display: block; color: #c9cdd3; font-size: .88rem; margin-top: .15rem; }
+.wpaec-onboarding__foot { margin: 1.2rem 0 0; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.wpaec-onboarding__foot a:not(.button) { color: #ff8a3d; font-weight: 700; text-decoration: none; }
