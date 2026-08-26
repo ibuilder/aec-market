@@ -4,7 +4,7 @@ Tags: marketplace, multivendor, woocommerce, licensing, services
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ Vendor uploads are restricted to an admin-controlled extension whitelist; execut
 No. Commissions, licenses and vendor data are preserved unless you set `remove_data_on_uninstall` in the `wpaecmarket_settings` option before deleting the plugin.
 
 == Changelog ==
+
+= 1.3.3 =
+* Fix: first-party AEC Forge Tools credit packs no longer record a vendor commission or appear in the vendor orders/earnings ledger.
 
 = 1.3.2 =
 * Improved: inline guidance on the Add-Product form (listing type, price, license keys, activation limit, service tiers) + a link to the Vendor Guide.

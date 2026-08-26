@@ -53,7 +53,13 @@ class AEC_Market_Commissions {
 			}
 
 			$product_id = $item->get_product_id();
-			$vendor_id  = (int) get_post_field( 'post_author', $product_id );
+
+			// First-party AEC Forge Tools credit packs are not vendor sales — skip them.
+			if ( '' !== (string) get_post_meta( $product_id, '_aec_tools_credits', true ) ) {
+				continue;
+			}
+
+			$vendor_id = (int) get_post_field( 'post_author', $product_id );
 
 			if ( ! $vendor_id || ! wpaec_is_vendor( $vendor_id ) ) {
 				continue;
