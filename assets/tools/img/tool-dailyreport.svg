@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Daily report">
+  <defs><linearGradient id="dr-m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#e8600a"/></linearGradient></defs>
+  <rect width="96" height="96" rx="20" fill="#22272f"/>
+  <rect x="22" y="22" width="52" height="52" rx="8" fill="#f6f5f2"/>
+  <!-- calendar header -->
+  <rect x="22" y="22" width="52" height="16" rx="8" fill="url(#dr-m)"/>
+  <rect x="22" y="30" width="52" height="8" fill="url(#dr-m)"/>
+  <rect x="32" y="16" width="5" height="12" rx="2.5" fill="#1b1e23"/>
+  <rect x="59" y="16" width="5" height="12" rx="2.5" fill="#1b1e23"/>
+  <!-- report lines -->
+  <g stroke="#c9cdd3" stroke-width="3" stroke-linecap="round"><path d="M30 48 H66"/><path d="M30 56 H66"/><path d="M30 64 H54"/></g>
+  <!-- check -->
+  <circle cx="64" cy="64" r="11" fill="#63c07a"/>
+  <path d="M59 64 l3.5 3.5 6.5 -8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

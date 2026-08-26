@@ -148,7 +148,7 @@ class Shortcodes {
 	 * @return string
 	 */
 	private function icon_url( $key ) {
-		$known = array( 'rfi', 'submittals', 'payapp', 'costexposure' );
+		$known = array( 'rfi', 'submittals', 'payapp', 'costexposure', 'dailyreport', 'minutes' );
 		$slug  = in_array( $key, $known, true ) ? $key : 'default';
 		return AEC_FORGE_TOOLS_URL . 'assets/tools/img/tool-' . $slug . '.svg';
 	}

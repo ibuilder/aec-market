@@ -44,6 +44,8 @@ class Service_Registry {
 			new Services\Service_Submittals(),
 			new Services\Service_Payapp(),
 			new Services\Service_Costexposure(),
+			new Services\Service_Dailyreport(),
+			new Services\Service_Minutes(),
 		);
 
 		/**

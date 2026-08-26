@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Meeting minutes">
+  <defs><linearGradient id="mn-m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#e8600a"/></linearGradient></defs>
+  <rect width="96" height="96" rx="20" fill="#22272f"/>
+  <!-- speech bubble -->
+  <path d="M24 26 h48 a6 6 0 0 1 6 6 v26 a6 6 0 0 1 -6 6 h-28 l-12 10 v-10 h-2 a6 6 0 0 1 -6 -6 v-26 a6 6 0 0 1 6 -6 z" fill="#f6f5f2"/>
+  <!-- action-item checklist inside -->
+  <g><circle cx="36" cy="38" r="4.5" fill="#63c07a"/><path d="M33.5 38 l1.8 1.8 3-3.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g><circle cx="36" cy="50" r="4.5" fill="#63c07a"/><path d="M33.5 50 l1.8 1.8 3-3.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <circle cx="36" cy="62" r="4.5" fill="url(#mn-m)"/>
+  <g stroke="#9aa1ab" stroke-width="3" stroke-linecap="round"><path d="M46 38 H68"/><path d="M46 50 H68"/><path d="M46 62 H62"/></g>
+</svg>

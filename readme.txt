@@ -4,7 +4,7 @@ Tags: marketplace, multivendor, woocommerce, licensing, services
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.1.3
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,10 @@ Vendor uploads are restricted to an admin-controlled extension whitelist; execut
 No. Commissions, licenses and vendor data are preserved unless you set `remove_data_on_uninstall` in the `wpaecmarket_settings` option before deleting the plugin.
 
 == Changelog ==
+
+= 1.2.0 =
+* New tools: Daily Construction Report and Meeting Minutes generators (both output .docx).
+* New: forge-branded icons for the new tools; the homepage tools band now lists every registered tool automatically.
 
 = 1.1.3 =
 * New: `[aec_forge_pricing]` shortcode — a dedicated credit-pricing page with pack cards and a per-tool cost table.
