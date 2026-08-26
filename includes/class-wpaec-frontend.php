@@ -164,8 +164,14 @@ class AEC_Market_Frontend {
 			echo '<div class="col-md-6 col-lg-4">';
 			echo '<div class="wpaec-vendor-card card h-100 border-0 shadow-sm p-4">';
 			echo '<div class="wpaec-vendor-avatar">' . esc_html( strtoupper( mb_substr( $name, 0, 1 ) ) ) . '</div>';
+			$since = wpaec_vendor_since( $vid );
+			$sales = wpaec_vendor_sales_count( $vid );
 			echo '<h3 class="h5 fw-bold mb-1 mt-3">' . esc_html( $name ) . '</h3>';
-			echo '<p class="text-muted small mb-2">' . esc_html( sprintf( /* translators: %d listings */ _n( '%d listing', '%d listings', $count, 'aec-market' ), $count ) ) . '</p>';
+			echo '<p class="text-muted small mb-2">'
+				. esc_html( sprintf( /* translators: %d listings */ _n( '%d listing', '%d listings', $count, 'aec-market' ), $count ) )
+				. ( $sales > 0 ? ' · ' . esc_html( sprintf( /* translators: %d sales */ _n( '%d sale', '%d sales', $sales, 'aec-market' ), $sales ) ) : '' )
+				. ( '' !== $since ? ' · ' . esc_html( sprintf( /* translators: %s year */ __( 'since %s', 'aec-market' ), $since ) ) : '' )
+				. '</p>';
 			if ( '' !== $bio ) {
 				echo '<p class="mb-3">' . esc_html( wp_trim_words( $bio, 26 ) ) . '</p>';
 			}

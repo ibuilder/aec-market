@@ -168,3 +168,37 @@ function wpaec_get_commission_rate( $vendor_id ) {
 	 */
 	return (float) apply_filters( 'wpaecmarket_commission_rate', $rate, $vendor_id );
 }
+
+/**
+ * Total number of sales across a vendor's published products.
+ *
+ * @param int $vendor_id Vendor user ID.
+ * @return int
+ */
+function wpaec_vendor_sales_count( $vendor_id ) {
+	$ids = get_posts(
+		array(
+			'post_type'   => 'product',
+			'author'      => (int) $vendor_id,
+			'post_status' => 'publish',
+			'fields'      => 'ids',
+			'numberposts' => -1,
+		)
+	);
+	$sum = 0;
+	foreach ( $ids as $pid ) {
+		$sum += (int) get_post_meta( $pid, 'total_sales', true );
+	}
+	return $sum;
+}
+
+/**
+ * The year a vendor joined.
+ *
+ * @param int $vendor_id Vendor user ID.
+ * @return string
+ */
+function wpaec_vendor_since( $vendor_id ) {
+	$user = get_userdata( (int) $vendor_id );
+	return $user ? mysql2date( 'Y', $user->user_registered ) : '';
+}
