@@ -40,7 +40,7 @@ class Anthropic {
 
 		if ( '' === $key ) {
 			throw new \RuntimeException(
-				esc_html__( 'No Anthropic API key configured. Add one under AEC Forge Tools → Settings.', 'aec-market' )
+				esc_html__( 'No Anthropic API key configured. Add one under AEC Market → Forge Tools.', 'aec-market' )
 			);
 		}
 
