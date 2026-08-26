@@ -97,6 +97,18 @@ class Admin {
 							value="<?php echo esc_attr( $s['free_trial_credits'] ); ?>" />
 							<span class="description"><?php esc_html_e( 'Granted once to each new account.', 'aec-market' ); ?></span></td>
 					</tr>
+					<tr>
+						<th scope="row"><label for="mp-rlmin"><?php esc_html_e( 'Rate limit', 'aec-market' ); ?></label></th>
+						<td>
+							<input name="aec_tools_settings[rate_per_min]" id="mp-rlmin" type="number" min="0" class="small-text"
+								value="<?php echo esc_attr( $s['rate_per_min'] ); ?>" />
+							<span class="description"><?php esc_html_e( 'runs per minute', 'aec-market' ); ?></span>
+							&nbsp;
+							<input name="aec_tools_settings[rate_per_day]" type="number" min="0" class="small-text"
+								value="<?php echo esc_attr( $s['rate_per_day'] ); ?>" />
+							<span class="description"><?php esc_html_e( 'runs per day, per user. 0 disables a limit. Protects against runaway loops and API-cost spikes.', 'aec-market' ); ?></span>
+						</td>
+					</tr>
 				</table>
 
 				<h2 class="title"><?php esc_html_e( 'Per-tool credit cost & model', 'aec-market' ); ?></h2>

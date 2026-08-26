@@ -240,6 +240,7 @@ class Shortcodes {
 					</tbody>
 				</table>
 				<p class="mp-muted mp-disclaimer"><?php echo esc_html( Settings::value( 'disclaimer' ) ); ?></p>
+				<p class="mp-muted mp-terms"><?php esc_html_e( 'Credits are consumed only when a run succeeds — failed runs are never charged. Credits do not expire. Because credits grant immediate access to AI processing, purchases are non-refundable except where required by law.', 'aec-market' ); ?></p>
 			</div>
 
 			<p class="mp-pricing-cta">

@@ -47,6 +47,12 @@ class Ajax {
 			wp_send_json_error( array( 'message' => __( 'Unknown tool.', 'aec-market' ) ), 404 );
 		}
 
+		// Rate limiting — protects against runaway loops and API-cost spikes.
+		$limited = $this->rate_limit_hit( $user_id );
+		if ( '' !== $limited ) {
+			wp_send_json_error( array( 'message' => $limited ), 429 );
+		}
+
 		$cost = $service->credits();
 		if ( ! Credits::has_credits( $user_id, $cost ) ) {
 			wp_send_json_error(
@@ -149,6 +155,37 @@ class Ajax {
 		header( 'Content-Length: ' . strlen( $bytes ) );
 		echo $bytes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- binary file body.
 		exit;
+	}
+
+	/**
+	 * Enforce per-user rate limits (abuse / API-cost protection).
+	 *
+	 * @param int $user_id User ID.
+	 * @return string Error message if over a limit, or '' to allow the run.
+	 */
+	private function rate_limit_hit( $user_id ) {
+		$per_min = (int) Settings::value( 'rate_per_min', 8 );
+		$per_day = (int) Settings::value( 'rate_per_day', 100 );
+
+		if ( $per_min > 0 ) {
+			$mkey = 'aec_tools_rl_m_' . (int) $user_id;
+			$m    = (int) get_transient( $mkey );
+			if ( $m >= $per_min ) {
+				return __( 'You are running tools very quickly — please wait a minute and try again.', 'aec-market' );
+			}
+			set_transient( $mkey, $m + 1, MINUTE_IN_SECONDS );
+		}
+
+		if ( $per_day > 0 ) {
+			$dkey = 'aec_tools_rl_d_' . (int) $user_id;
+			$d    = (int) get_transient( $dkey );
+			if ( $d >= $per_day ) {
+				return __( 'You have reached the current run limit. It resets within 24 hours — contact us if you need a higher limit.', 'aec-market' );
+			}
+			set_transient( $dkey, $d + 1, DAY_IN_SECONDS );
+		}
+
+		return '';
 	}
 
 	/**

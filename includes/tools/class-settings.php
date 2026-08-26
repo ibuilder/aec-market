@@ -36,6 +36,8 @@ class Settings {
 			),
 			'product_map'         => array(),
 			'tools_page_id'       => 0,
+			'rate_per_min'        => 8,
+			'rate_per_day'        => 100,
 			'disclaimer'          => 'Drafting aid — review before sending. Not contract or legal advice.',
 		);
 	}
@@ -128,6 +130,12 @@ class Settings {
 		}
 		if ( isset( $input['tools_page_id'] ) ) {
 			$out['tools_page_id'] = absint( $input['tools_page_id'] );
+		}
+		if ( isset( $input['rate_per_min'] ) ) {
+			$out['rate_per_min'] = max( 0, absint( $input['rate_per_min'] ) );
+		}
+		if ( isset( $input['rate_per_day'] ) ) {
+			$out['rate_per_day'] = max( 0, absint( $input['rate_per_day'] ) );
 		}
 		if ( isset( $input['disclaimer'] ) ) {
 			$out['disclaimer'] = sanitize_textarea_field( $input['disclaimer'] );
