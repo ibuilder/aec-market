@@ -25,6 +25,7 @@ class Shortcodes {
 	public function register() {
 		add_shortcode( 'aec_forge_tools', array( $this, 'tools' ) );
 		add_shortcode( 'aec_forge_tool', array( $this, 'single' ) );
+		add_shortcode( 'aec_forge_pricing', array( $this, 'pricing' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 	}
 
@@ -150,6 +151,103 @@ class Shortcodes {
 		$known = array( 'rfi', 'submittals', 'payapp', 'costexposure' );
 		$slug  = in_array( $key, $known, true ) ? $key : 'default';
 		return AEC_FORGE_TOOLS_URL . 'assets/tools/img/tool-' . $slug . '.svg';
+	}
+
+	/**
+	 * [aec_forge_pricing] — a dedicated credit-pricing page.
+	 *
+	 * @param array $atts Attributes.
+	 * @return string
+	 */
+	public function pricing( $atts ) {
+		$this->enqueue();
+		return $this->render_pricing();
+	}
+
+	/**
+	 * Pricing cards + per-tool cost table.
+	 *
+	 * @return string
+	 */
+	private function render_pricing() {
+		$packs    = Settings::value( 'packs', array() );
+		$map      = Settings::value( 'product_map', array() );
+		$services = Tools::instance()->services->all();
+		$trial    = (int) Settings::value( 'free_trial_credits', 0 );
+		$tp       = (int) Settings::value( 'tools_page_id', 0 );
+		$tools_url = $tp ? get_permalink( $tp ) : home_url( '/forge-tools/' );
+		$count    = count( $packs );
+		$has_woo  = Tools::woocommerce_active();
+
+		ob_start();
+		?>
+		<div class="mp-wrap mp-pricing">
+			<div class="mp-pricing-head">
+				<p class="mp-eyebrow"><?php esc_html_e( 'AEC Forge Tools', 'aec-market' ); ?></p>
+				<h2><?php esc_html_e( 'Simple credit pricing', 'aec-market' ); ?></h2>
+				<p class="mp-muted">
+					<?php
+					esc_html_e( 'Buy credits once, then spend them on any tool — credits never expire.', 'aec-market' );
+					if ( $trial > 0 ) {
+						echo ' ';
+						echo esc_html( sprintf( /* translators: %d: trial credits */ _n( 'New accounts start with %d free credit.', 'New accounts start with %d free credits.', $trial, 'aec-market' ), $trial ) );
+					}
+					?>
+				</p>
+			</div>
+
+			<div class="mp-price-grid">
+				<?php
+				$i = 0;
+				foreach ( $packs as $pack ) :
+					++$i;
+					$featured = ( $count >= 3 && 2 === $i );
+					$pid      = isset( $map[ $pack['id'] ] ) ? (int) $map[ $pack['id'] ] : 0;
+					$link     = $pid ? get_permalink( $pid ) : '';
+					$per      = ! empty( $pack['credits'] ) ? $pack['price'] / $pack['credits'] : 0;
+					?>
+					<div class="mp-price-card<?php echo $featured ? ' mp-price-featured' : ''; ?>">
+						<?php if ( $featured ) : ?>
+							<span class="mp-price-badge"><?php esc_html_e( 'Most popular', 'aec-market' ); ?></span>
+						<?php endif; ?>
+						<h3><?php echo esc_html( $pack['name'] ); ?></h3>
+						<p class="mp-price-amt">$<?php echo esc_html( number_format( (float) $pack['price'], 0 ) ); ?></p>
+						<p class="mp-price-meta">
+							<?php echo esc_html( sprintf( /* translators: %d: credits */ _n( '%d credit', '%d credits', (int) $pack['credits'], 'aec-market' ), (int) $pack['credits'] ) ); ?>
+							· <?php echo esc_html( sprintf( /* translators: %s: dollars per run */ __( '≈ $%s / run', 'aec-market' ), number_format( $per, 2 ) ) ); ?>
+						</p>
+						<?php if ( $has_woo && $link ) : ?>
+							<a class="mp-btn mp-btn-solid" href="<?php echo esc_url( add_query_arg( 'add-to-cart', $pid, $link ) ); ?>">
+								<?php echo esc_html( sprintf( /* translators: %s: pack name */ __( 'Buy %s', 'aec-market' ), $pack['name'] ) ); ?>
+							</a>
+						<?php else : ?>
+							<span class="mp-muted"><?php esc_html_e( 'product syncing…', 'aec-market' ); ?></span>
+						<?php endif; ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
+
+			<div class="mp-costs">
+				<h3><?php esc_html_e( 'What a run costs', 'aec-market' ); ?></h3>
+				<table class="mp-costs-table">
+					<tbody>
+						<?php foreach ( $services as $service ) : ?>
+							<tr>
+								<td><?php echo esc_html( $service->name() ); ?></td>
+								<td><?php echo esc_html( sprintf( /* translators: %d: credits */ _n( '%d credit', '%d credits', $service->credits(), 'aec-market' ), $service->credits() ) ); ?></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+				<p class="mp-muted mp-disclaimer"><?php echo esc_html( Settings::value( 'disclaimer' ) ); ?></p>
+			</div>
+
+			<p class="mp-pricing-cta">
+				<a class="mp-btn mp-btn-solid" href="<?php echo esc_url( $tools_url ); ?>"><?php esc_html_e( 'Open the tools', 'aec-market' ); ?> &rarr;</a>
+			</p>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**

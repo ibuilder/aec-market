@@ -109,3 +109,32 @@
 	.mp-hero::before { background: linear-gradient(90deg, rgba(20,23,27,.96) 60%, rgba(20,23,27,.72) 100%); }
 	.mp-hero-copy { padding: 1.8rem; }
 }
+
+/* --- Pricing page ([aec_forge_pricing]) --- */
+.mp-pricing-head { text-align: center; margin-bottom: 2rem; }
+.mp-pricing-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 800; margin: .2rem 0 .5rem; color: var(--mp-ink); }
+.mp-pricing-head .mp-muted { max-width: 40em; margin: 0 auto; }
+
+.mp-price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; align-items: stretch; margin: 0 auto 2.5rem; }
+.mp-price-card {
+	position: relative; border: 1px solid var(--mp-line); border-radius: 16px; padding: 1.8rem 1.4rem;
+	background: #fff; text-align: center; display: flex; flex-direction: column; gap: .3rem;
+}
+.mp-price-featured { border-color: var(--mp-accent); box-shadow: 0 14px 34px rgba(232,96,10,.14); transform: translateY(-6px); }
+.mp-price-badge {
+	position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+	background: linear-gradient(90deg, var(--mp-forge-2), var(--mp-accent)); color: #fff;
+	font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+	padding: .3rem .7rem; border-radius: 999px; white-space: nowrap;
+}
+.mp-price-card h3 { margin: .3rem 0 0; font-size: 1.05rem; color: var(--mp-ink); }
+.mp-price-amt { font-size: 2.4rem; font-weight: 800; color: var(--mp-ink); margin: .2rem 0; line-height: 1; }
+.mp-price-meta { color: #6b7280; font-size: .88rem; margin: 0 0 1rem; }
+.mp-price-card .mp-btn { margin-top: auto; }
+
+.mp-costs { max-width: 520px; margin: 0 auto 2rem; }
+.mp-costs h3 { text-align: center; font-size: 1.15rem; margin-bottom: .8rem; color: var(--mp-ink); }
+.mp-costs-table { width: 100%; border-collapse: collapse; }
+.mp-costs-table td { padding: .7rem .2rem; border-bottom: 1px solid var(--mp-line); font-size: .95rem; }
+.mp-costs-table td:last-child { text-align: right; font-weight: 700; color: var(--mp-accent); white-space: nowrap; }
+.mp-pricing-cta { text-align: center; }
