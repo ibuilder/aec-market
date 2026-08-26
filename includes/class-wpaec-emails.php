@@ -61,15 +61,41 @@ class AEC_Market_Emails {
 			return;
 		}
 
+		$site_name     = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
+		$dashboard_url = get_permalink( absint( wpaec_get_setting( 'vendor_dashboard_page' ) ) );
+		$guide_url     = home_url( '/help/vendor-guide/' );
+		$name          = $user->display_name ? $user->display_name : $user->user_login;
+
+		$body = sprintf(
+			/* translators: 1: vendor name, 2: site name. */
+			__( 'Hi %1$s,
+
+Great news — your vendor account on %2$s is approved. You can start selling right away, and you keep 100%% of your sales at launch.
+
+Three quick steps to get your store live:
+  1. Set up your store profile (name and short bio)
+  2. Add your payout details (PayPal or Stripe)
+  3. Add your first listing — a program (digital download) or a tiered service
+
+Your dashboard walks you through each step:
+%3$s
+
+New to selling on %2$s? The Vendor Guide covers licensing, uploads, and payouts:
+%4$s
+
+Welcome aboard,
+The %2$s team', 'aec-market' ),
+			$name,
+			$site_name,
+			$dashboard_url,
+			$guide_url
+		);
+
 		wp_mail(
 			$user->user_email,
 			/* translators: %s: site name. */
-			sprintf( __( '[%s] Your vendor account is approved', 'aec-market' ), wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) ),
-			sprintf(
-				/* translators: %s: dashboard URL. */
-				__( 'Congratulations! Your vendor account has been approved. Start listing your programs and services here: %s', 'aec-market' ),
-				get_permalink( absint( wpaec_get_setting( 'vendor_dashboard_page' ) ) )
-			)
+			sprintf( __( '[%s] Your vendor account is approved 🎉', 'aec-market' ), $site_name ),
+			$body
 		);
 	}
 

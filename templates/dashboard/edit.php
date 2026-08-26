@@ -33,6 +33,14 @@ $wpaec_selected_cat = $wpaec_product_id ? (int) current( wp_get_object_terms( $w
 ?>
 <h2><?php echo $wpaec_product_id ? esc_html__( 'Edit Listing', 'aec-market' ) : esc_html__( 'Add Listing', 'aec-market' ); ?></h2>
 
+<p class="wpaec-form-intro"><?php
+	printf(
+		/* translators: %s: Vendor Guide URL. */
+		wp_kses_post( __( 'List a <strong>Program</strong> (a digital download, optionally with license keys) or a <strong>Service</strong> (Basic / Standard / Premium packages). New listings go to review, then publish to your store — and you keep 100%% at launch. New here? <a href="%s">Read the Vendor Guide</a>.', 'aec-market' ) ),
+		esc_url( home_url( '/help/vendor-guide/' ) )
+	);
+?></p>
+
 <form method="post" enctype="multipart/form-data" class="wpaec-form">
 	<?php wp_nonce_field( 'wpaec_save_product', 'wpaec_product_nonce' ); ?>
 	<input type="hidden" name="wpaec_product_id" value="<?php echo esc_attr( $wpaec_product_id ); ?>" />
@@ -69,12 +77,14 @@ $wpaec_selected_cat = $wpaec_product_id ? (int) current( wp_get_object_terms( $w
 				<?php esc_html_e( 'Service (tiered packages)', 'aec-market' ); ?>
 			</option>
 		</select>
+		<small class="wpaec-hint"><?php esc_html_e( 'Program = a file buyers download (scripts, add-ins, templates, families). Service = work you deliver, priced in tiers.', 'aec-market' ); ?></small>
 	</p>
 
 	<div class="wpaec-type-fields" data-type="program">
 		<p class="wpaec-field">
 			<label for="wpaec_price"><?php esc_html_e( 'Price', 'aec-market' ); ?></label>
 			<input type="number" step="0.01" min="0" name="wpaec_price" id="wpaec_price" value="<?php echo esc_attr( $wpaec_product ? $wpaec_product->get_regular_price() : '' ); ?>" />
+			<small class="wpaec-hint"><?php esc_html_e( 'One-time price for the download.', 'aec-market' ); ?></small>
 		</p>
 		<p class="wpaec-field">
 			<label for="wpaec_file"><?php esc_html_e( 'Deliverable file', 'aec-market' ); ?></label>
@@ -86,15 +96,18 @@ $wpaec_selected_cat = $wpaec_product_id ? (int) current( wp_get_object_terms( $w
 				<input type="checkbox" name="wpaec_license_enabled" value="yes" <?php checked( $wpaec_product_id && 'yes' === get_post_meta( $wpaec_product_id, '_wpaec_license_enabled', true ) ); ?> />
 				<?php esc_html_e( 'Generate license keys on purchase', 'aec-market' ); ?>
 			</label>
+			<small class="wpaec-hint"><?php esc_html_e( 'Issues each buyer a unique key your tool can validate via our license API.', 'aec-market' ); ?></small>
 		</p>
 		<p class="wpaec-field">
 			<label for="wpaec_activation_limit"><?php esc_html_e( 'Activation limit per license', 'aec-market' ); ?></label>
 			<input type="number" min="1" name="wpaec_activation_limit" id="wpaec_activation_limit" value="<?php echo esc_attr( $wpaec_limit ); ?>" />
+			<small class="wpaec-hint"><?php esc_html_e( 'How many machines/seats each key may activate.', 'aec-market' ); ?></small>
 		</p>
 	</div>
 
 	<div class="wpaec-type-fields" data-type="service">
 		<h3><?php esc_html_e( 'Service packages', 'aec-market' ); ?></h3>
+		<p class="wpaec-hint"><?php esc_html_e( 'Fill only the tiers you want to offer. Each has its own price, scope, and delivery time. Leave a tier blank to hide it.', 'aec-market' ); ?></p>
 		<?php for ( $wpaec_i = 0; $wpaec_i < 3; $wpaec_i++ ) : ?>
 			<?php $wpaec_tier = isset( $wpaec_tiers[ $wpaec_i ] ) ? $wpaec_tiers[ $wpaec_i ] : array(); ?>
 			<fieldset class="wpaec-tier-fields">

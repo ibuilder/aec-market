@@ -4,7 +4,7 @@ Tags: marketplace, multivendor, woocommerce, licensing, services
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,10 @@ Vendor uploads are restricted to an admin-controlled extension whitelist; execut
 No. Commissions, licenses and vendor data are preserved unless you set `remove_data_on_uninstall` in the `wpaecmarket_settings` option before deleting the plugin.
 
 == Changelog ==
+
+= 1.3.2 =
+* Improved: inline guidance on the Add-Product form (listing type, price, license keys, activation limit, service tiers) + a link to the Vendor Guide.
+* Improved: the vendor-approval email now welcomes the seller with a clear 3-step getting-started path and links to the dashboard and Vendor Guide.
 
 = 1.3.1 =
 * New: vendor onboarding — the dashboard overview now shows a getting-started checklist (store profile, payout details, first listing) with progress, shown until a vendor is set up.
