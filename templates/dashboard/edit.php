@@ -67,6 +67,22 @@ $wpaec_selected_cat = $wpaec_product_id ? (int) current( wp_get_object_terms( $w
 		</select>
 	</p>
 
+	<?php $wpaec_compat_terms = class_exists( 'AEC_Market_Compat' ) ? AEC_Market_Compat::get_terms() : array(); ?>
+	<?php if ( ! empty( $wpaec_compat_terms ) ) : ?>
+		<p class="wpaec-field">
+			<label><?php esc_html_e( 'Compatible with', 'aec-market' ); ?></label>
+			<span class="wpaec-checks">
+			<?php
+			$wpaec_compat_selected = $wpaec_product_id ? wp_get_object_terms( $wpaec_product_id, AEC_Market_Compat::TAX, array( 'fields' => 'ids' ) ) : array();
+			foreach ( $wpaec_compat_terms as $wpaec_ct ) :
+				?>
+				<label class="wpaec-check-inline"><input type="checkbox" name="wpaec_compat[]" value="<?php echo esc_attr( $wpaec_ct->term_id ); ?>" <?php checked( in_array( $wpaec_ct->term_id, (array) $wpaec_compat_selected, true ) ); ?> /> <?php echo esc_html( $wpaec_ct->name ); ?></label>
+			<?php endforeach; ?>
+			</span>
+			<small class="wpaec-hint"><?php esc_html_e( 'Tag the software and versions your listing works with, so buyers can filter for it.', 'aec-market' ); ?></small>
+		</p>
+	<?php endif; ?>
+
 	<p class="wpaec-field">
 		<label for="wpaec_listing_type"><?php esc_html_e( 'Listing type', 'aec-market' ); ?></label>
 		<select name="wpaec_listing_type" id="wpaec_listing_type">

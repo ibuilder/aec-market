@@ -214,6 +214,12 @@ class AEC_Market_Dashboard {
 			wp_set_object_terms( $product_id, $category, 'product_cat' );
 		}
 
+		// Compatibility tags (nonce verified above).
+		if ( class_exists( 'AEC_Market_Compat' ) ) {
+			$compat = isset( $_POST['wpaec_compat'] ) ? array_map( 'absint', (array) wp_unslash( $_POST['wpaec_compat'] ) ) : array();
+			wp_set_object_terms( $product_id, $compat, AEC_Market_Compat::TAX, false );
+		}
+
 		if ( 'program' === $listing_type ) {
 			update_post_meta( $product_id, '_wpaec_license_enabled', isset( $_POST['wpaec_license_enabled'] ) ? 'yes' : 'no' );
 			$limit = isset( $_POST['wpaec_activation_limit'] ) ? max( 1, absint( wp_unslash( $_POST['wpaec_activation_limit'] ) ) ) : 1;

@@ -3,7 +3,7 @@
  * Plugin Name:       AEC Market – Skills & Programs Marketplace
  * Plugin URI:        https://github.com/ibuilder/aec-market
  * Description:       An Envato-style multi-vendor marketplace for AEC/BIM specialists, Excel/automation experts and AI tool authors. Sell digital products (scripts, templates, add-ins) with license keys and tiered services (Basic/Standard/Premium) side by side, with vendor dashboards, commissions and payout tracking. Includes AEC Forge Tools — pay-per-use AI tools for GC paperwork (RFIs, submittals, pay-apps, cost exposure) sold as WooCommerce credits. Requires WooCommerce.
- * Version:           1.4.0
+ * Version:           1.5.0
  * Author:            AEC Market
  * Author URI:        https://github.com/ibuilder
  * License:           GPL-2.0-or-later
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AEC_MARKET_VERSION', '1.4.0' );
+define( 'AEC_MARKET_VERSION', '1.5.0' );
 define( 'AEC_MARKET_PLUGIN_FILE', __FILE__ );
 define( 'AEC_MARKET_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AEC_MARKET_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -119,6 +119,7 @@ final class AEC_Market {
 		AEC_Market_Dashboard::init();
 		AEC_Market_Frontend::init();
 		AEC_Market_Emails::init();
+		AEC_Market_Compat::init();
 
 		if ( is_admin() ) {
 			AEC_Market_Admin::init();
@@ -151,6 +152,7 @@ final class AEC_Market {
 		require_once AEC_MARKET_PLUGIN_DIR . 'includes/class-wpaec-rest.php';
 		require_once AEC_MARKET_PLUGIN_DIR . 'includes/class-wpaec-dashboard.php';
 		require_once AEC_MARKET_PLUGIN_DIR . 'includes/class-wpaec-frontend.php';
+		require_once AEC_MARKET_PLUGIN_DIR . 'includes/class-wpaec-compat.php';
 		require_once AEC_MARKET_PLUGIN_DIR . 'includes/class-wpaec-emails.php';
 
 		if ( is_admin() ) {

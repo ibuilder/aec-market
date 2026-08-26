@@ -242,3 +242,7 @@
 .wpaec-hint { display: block; color: #6b7280; font-size: .85rem; margin-top: .25rem; }
 .wpaec-tier-fields { border: 1px solid #e2e5ea; border-radius: 10px; padding: 1rem 1.1rem; margin-bottom: 1rem; }
 .wpaec-tier-fields legend { font-weight: 700; padding: 0 .4rem; }
+
+/* --- Compatibility checkboxes (add-product form) --- */
+.wpaec-checks { display: flex; flex-wrap: wrap; gap: .4rem .9rem; margin-top: .3rem; }
+.wpaec-check-inline { display: inline-flex; align-items: center; gap: .3rem; font-size: .9rem; font-weight: 400; }
