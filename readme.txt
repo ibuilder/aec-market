@@ -4,7 +4,7 @@ Tags: marketplace, multivendor, woocommerce, licensing, services
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ Vendor uploads are restricted to an admin-controlled extension whitelist; execut
 No. Commissions, licenses and vendor data are preserved unless you set `remove_data_on_uninstall` in the `wpaecmarket_settings` option before deleting the plugin.
 
 == Changelog ==
+
+= 1.2.2 =
+* Fix: vendor downloadable-file uploads could be rejected with "not located within an approved directory" when WooCommerce's approved-download-directories list was empty; the uploads directory is now auto-registered before a vendor file is attached.
 
 = 1.2.1 =
 * New: per-user rate limiting (runs/minute and runs/day) on the AI tools to guard against runaway loops and API-cost spikes; configurable under AEC Market -> Forge Tools.

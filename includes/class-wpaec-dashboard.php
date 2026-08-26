@@ -299,14 +299,46 @@ class AEC_Market_Dashboard {
 			return;
 		}
 
+		// Guarantee the uploads directory is an approved WooCommerce download
+		// directory, otherwise set_downloads() rejects the vendor's file.
+		self::ensure_approved_upload_dir();
+
 		$download = new WC_Product_Download();
 		$download->set_id( md5( $upload['url'] ) );
 		$download->set_name( $name );
 		$download->set_file( $upload['url'] );
 
-		$product->set_downloads( array( $download ) );
+		try {
+			$product->set_downloads( array( $download ) );
+		} catch ( \Throwable $e ) {
+			self::notice_redirect( 'error', __( 'The file could not be attached as a download. Please contact support.', 'aec-market' ), 'edit', array( 'product' => $product_id ) );
+		}
 		$product->set_downloadable( true );
 		$product->save();
+	}
+
+	/**
+	 * Ensure the site uploads directory is registered as a WooCommerce
+	 * "approved download directory". Without it, set_downloads() throws
+	 * "the downloadable file is not located within an approved directory",
+	 * which would block vendors from attaching their deliverables.
+	 *
+	 * @return void
+	 */
+	private static function ensure_approved_upload_dir() {
+		$register_class = 'Automattic\\WooCommerce\\Internal\\ProductDownloads\\ApprovedDirectories\\Register';
+		if ( ! function_exists( 'wc_get_container' ) || ! class_exists( $register_class ) ) {
+			return;
+		}
+		try {
+			$register = wc_get_container()->get( $register_class );
+			$url      = wp_upload_dir()['baseurl'];
+			if ( method_exists( $register, 'get_by_url' ) && ! $register->get_by_url( $url ) ) {
+				$register->add_approved_directory( $url );
+			}
+		} catch ( \Throwable $e ) {
+			return; // Non-fatal — WooCommerce's own validation still governs.
+		}
 	}
 
 	/**
