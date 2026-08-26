@@ -19,6 +19,7 @@ class AEC_Market_Frontend {
 	 */
 	public static function init() {
 		add_shortcode( 'wpaec_vendor_store', array( __CLASS__, 'store_shortcode' ) );
+		add_shortcode( 'wpaec_vendors', array( __CLASS__, 'vendors_shortcode' ) );
 		add_action( 'woocommerce_product_meta_start', array( __CLASS__, 'sold_by_single' ) );
 		add_action( 'woocommerce_after_shop_loop_item_title', array( __CLASS__, 'sold_by_loop' ), 20 );
 	}
@@ -112,6 +113,66 @@ class AEC_Market_Frontend {
 		);
 		wp_reset_postdata();
 
+		return ob_get_clean();
+	}
+
+	/**
+	 * [wpaec_vendors] — a directory of approved vendors, each linking to their store.
+	 *
+	 * @param array $atts Shortcode attributes: number (max vendors), columns.
+	 * @return string
+	 */
+	public static function vendors_shortcode( $atts ) {
+		$atts = shortcode_atts( array( 'number' => 100 ), $atts, 'wpaec_vendors' );
+
+		$vendors = get_users(
+			array(
+				'role'       => 'wpaec_vendor',
+				'meta_key'   => '_wpaec_vendor_status', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'meta_value' => 'approved',             // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'orderby'    => 'display_name',
+				'order'      => 'ASC',
+				'number'     => absint( $atts['number'] ),
+			)
+		);
+
+		if ( empty( $vendors ) ) {
+			return '<div class="wpaec-vendors-empty"><p>' . esc_html__( 'No vendors yet — be the first to list on AEC Forge.', 'aec-market' ) . '</p>'
+				. '<a class="button" href="' . esc_url( home_url( '/become-a-vendor/' ) ) . '">' . esc_html__( 'Become a vendor', 'aec-market' ) . '</a></div>';
+		}
+
+		ob_start();
+		echo '<div class="wpaec-vendors row g-4">';
+		foreach ( $vendors as $vendor ) {
+			$vid   = (int) $vendor->ID;
+			$name  = wpaec_get_store_name( $vid );
+			$bio   = (string) get_user_meta( $vid, '_wpaec_store_bio', true );
+			$url   = wpaec_get_store_url( $vid );
+			$count = count(
+				get_posts(
+					array(
+						'post_type'   => 'product',
+						'author'      => $vid,
+						'post_status' => 'publish',
+						'fields'      => 'ids',
+						'numberposts' => -1,
+					)
+				)
+			);
+			echo '<div class="col-md-6 col-lg-4">';
+			echo '<div class="wpaec-vendor-card card h-100 border-0 shadow-sm p-4">';
+			echo '<div class="wpaec-vendor-avatar">' . esc_html( strtoupper( mb_substr( $name, 0, 1 ) ) ) . '</div>';
+			echo '<h3 class="h5 fw-bold mb-1 mt-3">' . esc_html( $name ) . '</h3>';
+			echo '<p class="text-muted small mb-2">' . esc_html( sprintf( /* translators: %d listings */ _n( '%d listing', '%d listings', $count, 'aec-market' ), $count ) ) . '</p>';
+			if ( '' !== $bio ) {
+				echo '<p class="mb-3">' . esc_html( wp_trim_words( $bio, 26 ) ) . '</p>';
+			}
+			if ( '' !== $url ) {
+				echo '<a class="btn btn-outline-primary btn-sm mt-auto align-self-start" href="' . esc_url( $url ) . '">' . esc_html__( 'Visit store', 'aec-market' ) . ' &rarr;</a>';
+			}
+			echo '</div></div>';
+		}
+		echo '</div>';
 		return ob_get_clean();
 	}
 }
