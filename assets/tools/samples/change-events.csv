@@ -1,0 +1,13 @@
+Number,Title,Trade/CSI,Status,Type,Estimated Cost
+CE-001,Rock excavation at footing F-12,31 00 00 Earthwork,Pending,Potential,48500
+CE-002,Added roof drains per ASI-14,22 14 00 Plumbing,Approved,Approved,12250
+CE-003,Curtain wall mullion revision,08 44 00 Glazing,Pending,Potential,96700
+CE-004,Unforeseen utility relocation,33 11 00 Site Utilities,Pending,Potential,73400
+CE-005,Door hardware upgrade (owner request),08 71 00 Openings,Approved,Approved,18900
+CE-006,Delete decorative canopy,05 50 00 Metals,Void,Potential,-22000
+CE-007,Spray fireproofing added at steel,07 81 00 Fireproofing,Pending,Potential,34200
+CE-008,RTU capacity increase,23 74 00 HVAC,Pending,Pricing,128000
+CE-009,Slab depression at imaging suite,03 30 00 Concrete,Approved,Approved,9600
+CE-010,Additional site lighting,26 56 00 Electrical,Pending,Potential,41800
+CE-011,Duplicate of CE-004 (voided),33 11 00 Site Utilities,Rejected,Potential,73400
+CE-012,ADA ramp regrade at entry,32 16 00 Site Concrete,Pending,Potential,15300

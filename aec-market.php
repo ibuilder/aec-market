@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       AEC Market – Skills & Programs Marketplace
  * Plugin URI:        https://github.com/ibuilder/aec-market
- * Description:       An Envato-style multi-vendor marketplace for AEC/BIM specialists, Excel/automation experts and AI tool authors. Sell digital products (scripts, templates, add-ins) with license keys and tiered services (Basic/Standard/Premium) side by side, with vendor dashboards, commissions and payout tracking. Requires WooCommerce.
- * Version:           1.0.0
+ * Description:       An Envato-style multi-vendor marketplace for AEC/BIM specialists, Excel/automation experts and AI tool authors. Sell digital products (scripts, templates, add-ins) with license keys and tiered services (Basic/Standard/Premium) side by side, with vendor dashboards, commissions and payout tracking. Includes AEC Forge Tools — pay-per-use AI tools for GC paperwork (RFIs, submittals, pay-apps, cost exposure) sold as WooCommerce credits. Requires WooCommerce.
+ * Version:           1.1.1
  * Author:            AEC Market
  * Author URI:        https://github.com/ibuilder
  * License:           GPL-2.0-or-later
@@ -21,11 +21,45 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AEC_MARKET_VERSION', '1.0.0' );
+define( 'AEC_MARKET_VERSION', '1.1.1' );
 define( 'AEC_MARKET_PLUGIN_FILE', __FILE__ );
 define( 'AEC_MARKET_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AEC_MARKET_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'AEC_MARKET_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+
+// AEC Forge Tools (pay-per-use AI tools) — merged subsystem constants.
+define( 'AEC_FORGE_TOOLS_URL', AEC_MARKET_PLUGIN_URL );
+define( 'AEC_FORGE_TOOLS_VERSION', AEC_MARKET_VERSION );
+
+/**
+ * Autoloader for the AEC_Forge_Tools namespace (includes/tools/).
+ *
+ * AEC_Forge_Tools\Service_Registry     -> includes/tools/class-service-registry.php
+ * AEC_Forge_Tools\Services\Service_Rfi -> includes/tools/services/class-service-rfi.php
+ * AEC_Forge_Tools\Files\Xlsx_Writer    -> includes/tools/files/class-xlsx-writer.php
+ */
+spl_autoload_register(
+	function ( $class ) {
+		$prefix = 'AEC_Forge_Tools\\';
+		if ( 0 !== strpos( $class, $prefix ) ) {
+			return;
+		}
+		$relative = substr( $class, strlen( $prefix ) );
+		$parts    = explode( '\\', $relative );
+		$class_nm = array_pop( $parts );
+		$sub      = array_map(
+			static function ( $p ) {
+				return strtolower( str_replace( '_', '-', $p ) );
+			},
+			$parts
+		);
+		$file_nm = 'class-' . strtolower( str_replace( '_', '-', $class_nm ) ) . '.php';
+		$path    = AEC_MARKET_PLUGIN_DIR . 'includes/tools/' . ( $sub ? implode( '/', $sub ) . '/' : '' ) . $file_nm;
+		if ( is_readable( $path ) ) {
+			require_once $path;
+		}
+	}
+);
 
 require_once AEC_MARKET_PLUGIN_DIR . 'includes/class-wpaec-install.php';
 
@@ -91,6 +125,9 @@ final class AEC_Market {
 		}
 
 		AEC_Market_Install::maybe_update();
+
+		// Boot the AEC Forge Tools subsystem (credits wallet, credit packs, AI tools).
+		\AEC_Forge_Tools\Tools::instance()->run();
 
 		/**
 		 * Fires after WP AEC Market is fully loaded.

@@ -1,0 +1,111 @@
+/* AEC Forge Tools front-end styles. Scoped under .mp-wrap to avoid theme clashes. */
+.mp-wrap {
+	--mp-ink: #1b1e23;
+	--mp-accent: #e8600a;
+	--mp-forge-2: #ff8a3d;
+	--mp-line: #e2e5ea;
+	max-width: 960px;
+	margin: 0 auto;
+	font-family: "Archivo", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+.mp-wrap * { box-sizing: border-box; }
+
+.mp-account { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+.mp-credit-chip {
+	background: var(--mp-ink); color: #fff; border-radius: 999px;
+	padding: .3rem .8rem; font-size: .85rem; font-weight: 600;
+}
+
+.mp-eyebrow { text-transform: uppercase; letter-spacing: .06em; font-size: .75rem; color: var(--mp-accent); font-weight: 700; margin: 0 0 .3rem; }
+.mp-muted { color: #6b7280; }
+.mp-back { text-decoration: none; font-weight: 600; }
+
+.mp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.mp-card { border: 1px solid var(--mp-line); border-radius: 12px; padding: 1.1rem; background: #fff; display: flex; flex-direction: column; }
+.mp-card h3 { margin: 0 0 .4rem; font-size: 1.05rem; }
+.mp-card p { margin: 0 0 1rem; color: #4b5563; font-size: .92rem; flex: 1; }
+.mp-card-foot { display: flex; justify-content: space-between; align-items: center; }
+.mp-cost { font-size: .85rem; color: #6b7280; }
+.mp-price { font-size: 1.2rem; font-weight: 700; margin: .2rem 0; }
+
+.mp-btn {
+	display: inline-block; border: 1px solid var(--mp-ink); color: var(--mp-ink);
+	background: #fff; border-radius: 8px; padding: .5rem .9rem; font-weight: 600;
+	text-decoration: none; cursor: pointer; font-size: .9rem;
+}
+.mp-btn:hover { background: #f3f4f6; }
+.mp-btn-solid { background: var(--mp-ink); color: #fff; }
+.mp-btn-solid:hover { background: #111827; color: #fff; }
+.mp-btn:disabled { opacity: .6; cursor: default; }
+
+.mp-form { margin-top: 1rem; }
+.mp-sample-bar { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.mp-field { margin-bottom: 1rem; display: inline-block; width: calc(50% - .5rem); vertical-align: top; }
+.mp-field:nth-child(odd) { margin-right: 1rem; }
+.mp-field-full, .mp-field.mp-field-full { display: block; width: 100%; margin-right: 0; }
+.mp-field label { display: block; font-weight: 600; font-size: .85rem; margin-bottom: .3rem; }
+.mp-field input[type="text"], .mp-field textarea, .mp-field input[type="file"] {
+	width: 100%; padding: .55rem .7rem; border: 1px solid var(--mp-line); border-radius: 8px; font-size: .95rem; font-family: inherit;
+}
+.mp-field textarea { min-height: 120px; resize: vertical; }
+
+.mp-result-wrap { margin-top: 2rem; }
+.mp-download {
+	display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+	border: 1px solid var(--mp-accent); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1.5rem;
+}
+.mp-result {
+	white-space: pre-wrap; word-wrap: break-word; background: #f9fafb; border: 1px solid var(--mp-line);
+	border-radius: 10px; padding: 1.1rem; font-size: .9rem; line-height: 1.5; overflow-x: auto;
+}
+.mp-disclaimer { font-size: .82rem; margin-top: .6rem; }
+.mp-notice { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: .8rem 1rem; }
+.mp-buy-title { margin-top: 2.5rem; }
+
+@media ( max-width: 600px ) {
+	.mp-field { width: 100%; margin-right: 0; display: block; }
+}
+
+/* --- Forge graphics: hero banner, card icons, richer cards --- */
+.mp-hero {
+	position: relative; overflow: hidden; border-radius: 18px;
+	background: #14171b var(--mp-hero) right center / cover no-repeat;
+	min-height: 300px; margin: 0 0 2rem; display: flex; align-items: center;
+}
+.mp-hero::before {
+	content: ""; position: absolute; inset: 0;
+	background: linear-gradient(90deg, rgba(20,23,27,.94) 0%, rgba(20,23,27,.82) 42%, rgba(20,23,27,0) 78%);
+}
+.mp-hero-copy { position: relative; z-index: 1; max-width: 560px; padding: 2.2rem 2.4rem; color: #f4f2ef; }
+.mp-hero-eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 800; color: var(--mp-accent); margin: 0 0 .5rem; }
+.mp-hero-title { font-size: clamp(1.6rem, 4vw, 2.5rem); line-height: 1.08; font-weight: 800; margin: 0 0 .7rem; color: #fff; }
+.mp-hero-title span { color: var(--mp-forge-2); }
+.mp-hero-sub { font-size: .98rem; line-height: 1.5; color: #c9cdd3; margin: 0; max-width: 470px; }
+
+.mp-card-link { text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.mp-card { position: relative; overflow: hidden; }
+.mp-card::before {
+	content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%;
+	background: linear-gradient(90deg, var(--mp-forge-2), var(--mp-accent)); opacity: 0; transition: opacity .15s ease;
+}
+.mp-card-link:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(20,23,27,.12); border-color: var(--mp-accent); }
+.mp-card-link:hover::before { opacity: 1; }
+.mp-card-ic { display: inline-flex; margin-bottom: .8rem; }
+.mp-card-ic img { display: block; width: 56px; height: 56px; border-radius: 14px; }
+.mp-card h3 { color: var(--mp-ink); }
+.mp-btn-ghost { border: none; background: none; color: var(--mp-accent); padding: 0; font-weight: 700; }
+.mp-card-link:hover .mp-btn-ghost { text-decoration: underline; }
+
+.mp-tool-head { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1rem; }
+.mp-tool-ic img { width: 64px; height: 64px; border-radius: 16px; }
+.mp-tool-head h2 { margin: .1rem 0 .3rem; }
+.mp-tool-head .mp-eyebrow { margin-bottom: .2rem; }
+.mp-tool-head .mp-muted { margin: 0; }
+
+.mp-buy-title { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--mp-line); }
+
+@media ( max-width: 820px ) {
+	.mp-hero { min-height: 260px; }
+	.mp-hero::before { background: linear-gradient(90deg, rgba(20,23,27,.96) 60%, rgba(20,23,27,.72) 100%); }
+	.mp-hero-copy { padding: 1.8rem; }
+}

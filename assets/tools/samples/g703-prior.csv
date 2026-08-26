@@ -1,0 +1,12 @@
+Item No,Description,Scheduled Value,From Previous,This Period,Stored Materials
+1,Mobilization,75000,75000,0,0
+2,General Conditions,240000,140000,20000,0
+3,Sitework / Earthwork,380000,300000,60000,0
+4,Concrete Foundations,520000,400000,90000,20000
+5,Structural Steel,610000,150000,200000,80000
+6,Unit Masonry,290000,60000,70000,0
+7,Roofing,210000,0,40000,25000
+8,Curtain Wall / Glazing,340000,0,30000,60000
+9,MEP Rough-In,780000,320000,180000,0
+10,Interior Finishes,450000,40000,60000,0
+11,Overhead & Profit,180000,175000,12000,0

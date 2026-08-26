@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Cost exposure">
+  <defs><linearGradient id="ce-m" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#e8600a"/><stop offset="1" stop-color="#ff8a3d"/></linearGradient></defs>
+  <rect width="96" height="96" rx="20" fill="#22272f"/>
+  <!-- axes -->
+  <path d="M26 22 V72 H74" fill="none" stroke="#5c6470" stroke-width="3" stroke-linecap="round"/>
+  <!-- bars -->
+  <rect x="34" y="52" width="9" height="16" rx="2" fill="#4a5763"/>
+  <rect x="48" y="42" width="9" height="26" rx="2" fill="#6b7885"/>
+  <rect x="62" y="30" width="9" height="38" rx="2" fill="url(#ce-m)"/>
+  <!-- exposure trend line -->
+  <path d="M30 60 L44 50 L58 44 L70 26" fill="none" stroke="#ff8a3d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="70" cy="26" r="4.5" fill="#ff8a3d"/>
+  <path d="M64 24 l6 -2 l-1 6" fill="none" stroke="#ff8a3d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

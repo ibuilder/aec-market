@@ -4,7 +4,7 @@ Tags: marketplace, multivendor, woocommerce, licensing, services
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,16 @@ Vendor uploads are restricted to an admin-controlled extension whitelist; execut
 No. Commissions, licenses and vendor data are preserved unless you set `remove_data_on_uninstall` in the `wpaecmarket_settings` option before deleting the plugin.
 
 == Changelog ==
+
+= 1.1.1 =
+* New: AEC Forge–branded graphics for the tools dashboard — a hero banner, per-tool icons, and richer hover cards.
+
+= 1.1.0 =
+* New: AEC Forge Tools — pay-per-use AI tools for the tedious GC paperwork (RFI draft generator, submittal-log review, G702/G703 pay-app assembly, cost-exposure report).
+* New: credits wallet with an append-only ledger, free-trial credits for new accounts, and idempotent credit grants on completed WooCommerce orders.
+* New: credit packs auto-synced to virtual WooCommerce products; per-tool credit cost and Claude model overrides.
+* New: `[aec_forge_tools]` and `[aec_forge_tool key="..."]` shortcodes for the tools dashboard and single-tool pages, plus dependency-free .docx/.xlsx deliverables.
+* Note: requires an Anthropic API key (set under AEC Market → Forge Tools) for the AI tools to run.
 
 = 1.0.0 =
 * Initial release: vendor onboarding, front-end dashboard, licensing with REST activation API, tiered services, commissions and payout tracking.

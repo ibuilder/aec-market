@@ -22,9 +22,14 @@ if ( empty( $wpaec_settings['remove_data_on_uninstall'] ) ) {
 global $wpdb;
 
 // phpcs:disable WordPress.DB.DirectDatabaseQuery -- Uninstall cleanup of plugin-owned tables and rows.
-foreach ( array( 'wpaec_license_activations', 'wpaec_licenses', 'wpaec_commissions' ) as $wpaec_table ) {
+foreach ( array( 'wpaec_license_activations', 'wpaec_licenses', 'wpaec_commissions', 'aec_tools_ledger' ) as $wpaec_table ) {
 	$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $wpdb->prefix . $wpaec_table ) );
 }
+
+// AEC Forge Tools: credits balance (user meta) and options.
+$wpdb->query( $wpdb->prepare( 'DELETE FROM %i WHERE meta_key = %s', $wpdb->usermeta, 'aec_tools_credits' ) );
+$wpaec_tools_opt_like = $wpdb->esc_like( 'aec_tools_' ) . '%';
+$wpdb->query( $wpdb->prepare( 'DELETE FROM %i WHERE option_name LIKE %s', $wpdb->options, $wpaec_tools_opt_like ) );
 
 $wpaec_meta_like = $wpdb->esc_like( '_wpaec_' ) . '%';
 
